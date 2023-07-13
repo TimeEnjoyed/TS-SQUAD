@@ -1,8 +1,19 @@
 import Head from "next/head";
 import Link from "next/link";
-
+import { useSession, signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 export default function Home() {
   //TODO: turn this into auth page
+  const { data: session } = useSession();
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { push } = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      push("/typing");
+    }
+  }, [push, session]);
   return (
     <>
       <Head>
@@ -11,11 +22,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div className="h-100 flex items-center  justify-center">
-        <Link href="/typing">
-          <div className="rounded-pill w-[170px] bg-blue-500 px-4 py-2 font-bold text-white">
-            Go to typing test
-          </div>
-        </Link>
+        {session ? (
+          <Link href="/typing">
+            <div className="rounded-pill w-[170px] bg-blue-500 px-4 py-2 font-bold text-white">
+              Go to typing test
+            </div>
+          </Link>
+        ) : (
+          <button
+            onClick={() => signIn()}
+            className="rounded-pill w-[170px] bg-blue-500 px-4 py-2 font-bold text-white"
+          >
+            Sign in
+          </button>
+        )}
       </div>
     </>
   );
