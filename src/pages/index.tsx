@@ -2,6 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 
 export default function Home() {
+  //TODO: turn this into auth page
   return (
     <>
       <Head>
@@ -12,7 +13,7 @@ export default function Home() {
       <div className="h-100 flex items-center  justify-center">
         <Link href="/typing">
           <div className="rounded-pill w-[170px] bg-blue-500 px-4 py-2 font-bold text-white">
-            Go to typing test, TODO: turn this into auth page
+            Go to typing test
           </div>
         </Link>
       </div>
