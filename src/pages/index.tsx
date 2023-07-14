@@ -4,7 +4,6 @@ import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 export default function Home() {
-  //TODO: turn this into auth page
   const { data: session } = useSession();
   // eslint-disable-next-line @typescript-eslint/unbound-method
   const { push } = useRouter();
@@ -37,17 +36,6 @@ export default function Home() {
             Sign in
           </button>
         )}
-        <div className="my-10 flex w-[60vw] flex-col items-center gap-2">
-          <div>{`Cant Lie, not the best submission but life got in the way`}</div>
-          <div>
-            If I had more time would try to make it so twitch chat can join in
-            simultaneously, and would have leader board and stuff (kind of like
-            typeracer)
-          </div>
-          <div className=" my-10">
-            btw added twitch auth just so it falls as twitch category lol
-          </div>
-        </div>
       </div>
     </>
   );

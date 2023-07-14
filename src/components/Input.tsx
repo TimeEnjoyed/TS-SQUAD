@@ -79,13 +79,24 @@ function Input(props: { word: string }) {
     <div className="flex flex-col gap-10 break-all text-xl">
       {wpm !== -1 ? (
         <div className="align-center flex flex-col gap-3 self-center">
-          <div className=" font-bold">{`Congratulations your WPM is ${wpm}`}</div>
+          <div className="text-center font-bold">{`Congratulations your WPM is ${wpm}`}</div>
           <button
             onClick={resetState}
             className="rounded-pill w-[170px] self-center justify-self-end bg-blue-500 px-4 py-2 font-bold text-white"
           >
             Retry
           </button>
+          <div className="my-10 flex w-[60vw] flex-col items-center gap-2">
+            <div>Cant Lie, not the best submission but life got in the way</div>
+            <div>
+              If I had more time would try to make it so twitch chat can join in
+              simultaneously, and would have leader board and stuff (kind of
+              like typeracer)
+            </div>
+            <div className=" my-10">
+              btw added twitch auth just so it falls as twitch category lol
+            </div>
+          </div>
         </div>
       ) : (
         <>
