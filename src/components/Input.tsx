@@ -1,5 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ProgressBar from "./ProgressBar";
+import Word from "./Word";
 
 //word - word to be typed
 //text - word user inputting
@@ -34,10 +35,23 @@ function Input(props: { word: string }) {
   const { word } = props;
   const [startTimer, setStartTimer] = React.useState<Date | null>(null);
   const [percentage, setPercentage] = React.useState(0);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const [wpm, setWpm] = React.useState(-1);
+
+  useEffect(() => {
+    if (inputRef?.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   const resetState = () => {
     setText("");
     setStartTimer(null);
+    setWpm(-1);
+    if (inputRef?.current) {
+      inputRef.current.focus();
+    }
   };
 
   const handlePaste = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,34 +65,50 @@ function Input(props: { word: string }) {
   };
 
   useEffect(() => {
-    if (!startTimer && !text) {
+    if (!startTimer && text.length > 0) {
       setStartTimer(new Date());
     }
     if (text === word && startTimer) {
       setWpm(calculate_wpm(startTimer, new Date(), word.length));
-      resetState();
     }
 
     setPercentage(calculatePercentageDone(text, word));
   }, [startTimer, text, word]);
 
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col gap-10 break-all text-xl">
       {wpm !== -1 ? (
-        <div className="self-center font-bold">{`Congratulations your WPM is ${wpm}`}</div>
+        <div className="align-center flex flex-col gap-3 self-center">
+          <div className=" font-bold">{`Congratulations your WPM is ${wpm}`}</div>
+          <button
+            onClick={resetState}
+            className="rounded-pill w-[170px] self-center justify-self-end bg-blue-500 px-4 py-2 font-bold text-white"
+          >
+            Retry
+          </button>
+        </div>
       ) : (
-        <input
-          type="text"
-          onPaste={handlePaste}
-          placeholder="Type here"
-          onChange={(event) => setText(event.target.value)}
-          className="w-[50vw] self-center rounded border border-gray-900 px-4 py-2 text-gray-700"
-        />
+        <>
+          <Word word={word} text={text} />
+          <input
+            type="text"
+            onPaste={handlePaste}
+            placeholder="Type here"
+            onChange={(event) => setText(event.target.value)}
+            className="w-[50vw] self-center rounded border border-gray-900 px-4 py-2 text-gray-700"
+            ref={inputRef}
+          />
+
+          {startTimer && (
+            <>
+              <div className="self-center">{`${percentage}%`}</div>
+              <div className="w-[90vw] self-center">
+                <ProgressBar percentage={percentage} />
+              </div>
+            </>
+          )}
+        </>
       )}
-      <div className="self-center">{`${percentage}%`}</div>
-      <div className="w-[90vw] self-center">
-        <ProgressBar percentage={percentage} />
-      </div>
     </div>
   );
 }

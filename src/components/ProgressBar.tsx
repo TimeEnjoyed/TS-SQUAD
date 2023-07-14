@@ -5,7 +5,7 @@ function ProgressBar(props: { percentage: number }) {
   return (
     <div className="mb-4 h-4 w-full rounded-full bg-gray-200 dark:bg-gray-700">
       <div
-        className="h-4 rounded-full bg-blue-600 dark:bg-blue-500"
+        className="h-4 rounded-full bg-purple-600"
         style={{ width: `${percentage}%` }}
       ></div>
     </div>

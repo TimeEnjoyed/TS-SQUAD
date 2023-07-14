@@ -14,6 +14,7 @@ function Typing() {
       push("/");
     }
   }, [push, session]);
+
   return (
     <>
       <div className="flex items-center justify-between bg-purple-800 p-2">
