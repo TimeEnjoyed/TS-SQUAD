@@ -5,6 +5,7 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }: AppProps) => {
   return (
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
     <SessionProvider session={pageProps.session}>
       <Component {...pageProps} />;
     </SessionProvider>
