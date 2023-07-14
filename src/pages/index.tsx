@@ -30,6 +30,7 @@ export default function Home() {
           </Link>
         ) : (
           <button
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={() => signIn()}
             className="rounded-pill w-[170px] bg-blue-500 px-4 py-2 font-bold text-white"
           >

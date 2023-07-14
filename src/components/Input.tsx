@@ -54,7 +54,7 @@ function Input(props: { word: string }) {
     }
   };
 
-  const handlePaste = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
     //Incase they try to copy and paste xD
     event.preventDefault();
     alert("Nice try, I am going to waste your time for trying to be cheeky");

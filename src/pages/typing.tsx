@@ -20,7 +20,7 @@ function Typing() {
       <div className="flex items-center justify-between bg-purple-800 p-2">
         <div className="flex items-center gap-7">
           <Image
-            src={session?.user?.image}
+            src={session?.user?.image ?? ""}
             width={50}
             height={50}
             alt="Picture of current user"
@@ -28,6 +28,7 @@ function Typing() {
           <div className=" text-white">Welcome {session?.user?.name}</div>
         </div>
         <button
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => signOut()}
           className="rounded-pill w-[170px] justify-self-end bg-blue-500 px-4 py-2 font-bold text-white"
         >
